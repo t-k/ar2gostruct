@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+begin
+  require 'bundler'
+  Bundler.setup(:default)
+rescue Exception => e
+end
+
+require 'optparse'
+require 'ar2gostruct'
+
+OptionParser.new do |opt|
+  opt.banner = "Usage: annotate [options] [model_file]*"
+
+  opt.on('-v', '--version',
+          "Show the current version of this gem") do
+    puts "ar2gostruct v#{Ar2gostruct.version}"; exit
+  end
+
+  opt.on('--orm orm', "Specify ORM. Currently supports only qbs") do |orm|
+    ENV['orm'] = orm.to_s
+  end
+
+  opt.on('--model-dir dir',
+          "Model files stored in dir rather than app/models") do |dir|
+    ENV['model_dir'] = dir.to_s
+  end
+  opt.parse!(ARGV)
+end
+Ar2gostruct.load
+Ar2gostruct.convert!
