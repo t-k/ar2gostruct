@@ -70,7 +70,7 @@ module Ar2gostruct
         type = TYPE_MAP[col_type] || "string"
       end
 
-      info << sprintf("\t%-#{max_size}.#{max_size}s%-15.15s'%s'\n", col.name.camelize, type, tags.join(" "))
+      info << sprintf("\t%-#{max_size}.#{max_size}s%-15.15s`%s`\n", col.name.camelize, type, tags.join(" "))
 
     end
 
