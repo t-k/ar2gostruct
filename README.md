@@ -1,4 +1,5 @@
 # Ar2gostruct
+[![Gem Version](https://badge.fury.io/rb/ar2gostruct.png)](https://rubygems.org/gems/ar2gostruct)
 
 Automatically generate Golang Struct from your activerecord models.
 
