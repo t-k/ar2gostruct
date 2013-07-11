@@ -1,10 +1,5 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-begin
-  require 'bundler'
-  Bundler.setup(:default)
-rescue Exception => e
-end
 
 require 'optparse'
 require 'ar2gostruct'

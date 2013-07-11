@@ -3,7 +3,7 @@ require "ar2gostruct/version"
 require "active_support/inflector"
 require "active_record"
 
-require "ar2gostruct/railtie"
+require "ar2gostruct/railtie" if defined?(Rails)
 
 module Ar2gostruct
   MODEL_DIR   = ENV["model_dir"] || "app/models"
