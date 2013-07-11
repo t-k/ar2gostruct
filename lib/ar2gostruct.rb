@@ -65,7 +65,7 @@ module Ar2gostruct
       case col_type
       when "integer"
         type = TYPE_MAP["integer(#{col.limit})"] || "int32"
-        type = "u#{col_type}" if col.sql_type.match("unsigned").present?
+        type = "u#{type}" if col.sql_type.match("unsigned").present?
       else
         type = TYPE_MAP[col_type] || "string"
       end
