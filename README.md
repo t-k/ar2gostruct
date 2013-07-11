@@ -24,6 +24,8 @@ Usage
 On your rails directory.
 ```bash
 bundle exec rake ar2gostruct
+# or
+ar2gostruct
 ```
 this will returns
 ```bash
@@ -50,6 +52,8 @@ If you're using [qbs](https://github.com/coocood/qbs#), Additional options are a
 
 ```bash
 bundle exec rake ar2gostruct orm=qbs
+# or
+ar2gostruct -o qbs
 
 // app/models/users.rb
 // Table name: users
