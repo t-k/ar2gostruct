@@ -24,7 +24,7 @@ On your rails directory.
 ```bash
 bundle exec ar2gostruct
 ```
-this will puts
+this will returns
 ```bash
 // app/models/users.rb
 // Table name: users
