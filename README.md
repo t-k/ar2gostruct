@@ -22,7 +22,7 @@ Usage
 
 On your rails directory.
 ```bash
-bundle exec ar2gostruct
+bundle exec rake ar2gostruct
 ```
 this will returns
 ```bash
@@ -48,7 +48,7 @@ type Users struct {
 If you're using [qbs](https://github.com/coocood/qbs#), Additional options are available.
 
 ```bash
-bundle exec ar2gostruct -o qbs
+bundle exec rake ar2gostruct orm=qbs
 
 // app/models/users.rb
 // Table name: users

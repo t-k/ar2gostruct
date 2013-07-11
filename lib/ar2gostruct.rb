@@ -87,13 +87,9 @@ module Ar2gostruct
   end
 
   def self.get_model_names
-    models = ARGV.dup
-    models.shift
-
-    if models.empty?
-      Dir.chdir(MODEL_DIR) do
-        models = Dir["**/*.rb"]
-      end
+    models = []
+    Dir.chdir(MODEL_DIR) do
+      models = Dir["**/*.rb"]
     end
     models
   end
@@ -109,7 +105,7 @@ module Ar2gostruct
           self.convert_to_gostruct(klass)
         end
       rescue Exception => e
-        puts "// Unable to annotate #{class_name}: #{e.message}"
+        puts "// Unable to convert #{class_name}: #{e.message}"
       end
 
     end
