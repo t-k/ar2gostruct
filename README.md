@@ -66,7 +66,6 @@ type Users struct {
   LastSignInIp           string         'json:"last_sign_in_ip"'
   CreatedAt              time.Time      'json:"created_at"'
   UpdatedAt              time.Time      'json:"updated_at"'
-  RoleId                 int8           'json:"role_id" qbs:"notnull,default:'1'"'
 }
 
 ```
