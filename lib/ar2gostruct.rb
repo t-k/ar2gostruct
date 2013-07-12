@@ -32,7 +32,12 @@ module Ar2gostruct
 
   def self.get_schema_info(klass)
     info = "// Table name: #{klass.table_name}\n"
-    info << "type #{klass.table_name.camelize} struct {\n"
+    if ENV['plural']
+      struct_name = klass.table_name.camelize
+    else
+      struct_name = klass.to_s
+    end
+    info << "type #{struct_name} struct {\n"
 
     max_size = klass.column_names.collect{|name| name.size}.max + 1
     klass.columns.each do |col|

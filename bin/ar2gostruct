@@ -5,7 +5,7 @@ require 'optparse'
 require 'ar2gostruct'
 
 OptionParser.new do |opt|
-  opt.banner = "Usage: annotate [options] [model_file]*"
+  opt.banner = "Usage: ar2gostruct [options]"
 
   opt.on('-v', '--version',
           "Show the current version of this gem") do
@@ -14,6 +14,10 @@ OptionParser.new do |opt|
 
   opt.on('--orm orm', "Specify ORM. Currently supports only qbs") do |orm|
     ENV['orm'] = orm.to_s
+  end
+
+  opt.on('--plural', "Pluralize struct name") do
+    ENV['plural'] = "true"
   end
 
   opt.on('--model-dir dir',
