@@ -35,7 +35,7 @@ module Ar2gostruct
     if ENV['plural']
       struct_name = klass.table_name.camelize
     else
-      struct_name = klass.to_s
+      struct_name = klass.to_s.tr_s('::', '')
     end
     info << "type #{struct_name} struct {\n"
 
