@@ -61,6 +61,12 @@ module Ar2gostruct
         if col.default
           orm_option << "default:'#{col.default}'"
         end
+        # set timestamp
+        if col.name == "created_at"
+          orm_option << "created_at"
+        elsif col.name == "updated_at"
+          orm_option << "updated"
+        end
         if orm_option.present?
           tags << "qbs:\"#{orm_option.join(",")}\""
         end
@@ -100,13 +106,11 @@ module Ar2gostruct
   end
 
   def self.convert!
-    annotated = []
     self.get_model_names.each do |m|
       class_name = m.sub(/\.rb$/,'').camelize
       begin
         klass = class_name.split('::').inject(Object){ |klass,part| klass.const_get(part) }
         if klass < ActiveRecord::Base && !klass.abstract_class?
-          annotated << class_name
           self.convert_to_gostruct(klass)
         end
       rescue Exception => e
