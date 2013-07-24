@@ -29,9 +29,9 @@ ar2gostruct
 ```
 this will returns
 ```bash
-// app/models/users.rb
+// app/models/user.rb
 // Table name: users
-type Users struct {
+type User struct {
   Id                     int32          `json:"id"`
   Email                  string         `json:"email"`
   EncryptedPassword      string         `json:"encrypted_password"`
@@ -43,6 +43,10 @@ type Users struct {
   LastSignInAt           time.Time      `json:"last_sign_in_at"`
   CurrentSignInIp        string         `json:"current_sign_in_ip"`
   LastSignInIp           string         `json:"last_sign_in_ip"`
+  ConfirmationToken      string         `json:"confirmation_token"`
+  ConfirmedAt            time.Time      `json:"confirmed_at"`
+  ConfirmationSentAt     time.Time      `json:"confirmation_sent_at"`
+  UnconfirmedEmail       string         `json:"unconfirmed_email"`
   CreatedAt              time.Time      `json:"created_at"`
   UpdatedAt              time.Time      `json:"updated_at"`
 }
@@ -54,10 +58,11 @@ If you're using [qbs](https://github.com/coocood/qbs#), Additional options are a
 bundle exec rake ar2gostruct orm=qbs
 # or
 ar2gostruct -o qbs
+# If you prefer plural struct name, "--plural" option is available.
 
-// app/models/users.rb
+// app/models/user.rb
 // Table name: users
-type Users struct {
+type User struct {
   Id                     int32          `json:"id" qbs:"pk,notnull"`
   Email                  string         `json:"email" qbs:"notnull,default:''"`
   EncryptedPassword      string         `json:"encrypted_password" qbs:"notnull,default:''"`
@@ -69,9 +74,14 @@ type Users struct {
   LastSignInAt           time.Time      `json:"last_sign_in_at"`
   CurrentSignInIp        string         `json:"current_sign_in_ip"`
   LastSignInIp           string         `json:"last_sign_in_ip"`
-  CreatedAt              time.Time      `json:"created_at"`
-  UpdatedAt              time.Time      `json:"updated_at"`
+  ConfirmationToken      string         `json:"confirmation_token"`
+  ConfirmedAt            time.Time      `json:"confirmed_at"`
+  ConfirmationSentAt     time.Time      `json:"confirmation_sent_at"`
+  UnconfirmedEmail       string         `json:"unconfirmed_email"`
+  CreatedAt              time.Time      `json:"created_at" qbs:"created"`
+  UpdatedAt              time.Time      `json:"updated_at" qbs:"updated"`
 }
+
 
 ```
 

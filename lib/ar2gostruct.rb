@@ -63,7 +63,7 @@ module Ar2gostruct
         end
         # set timestamp
         if col.name == "created_at"
-          orm_option << "created_at"
+          orm_option << "created"
         elsif col.name == "updated_at"
           orm_option << "updated"
         end
