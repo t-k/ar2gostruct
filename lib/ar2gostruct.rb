@@ -1,3 +1,14 @@
+unless File.exists?("./Rakefile") || File.exists?("./Gemfile")
+  abort "Please run ar2gostruct from the root of the project."
+end
+
+require "rubygems"
+begin
+  require "rubygems"
+  require "bundler/setup"
+rescue Exception => e
+end
+
 require "ar2gostruct/version"
 
 require "active_support/inflector"
@@ -23,16 +34,18 @@ module Ar2gostruct
   }
 
   def self.load
-    begin
-      require "#{Dir.pwd}/config/environment"
-    rescue
+    path = ENV["require_path"] || "#{Dir.pwd}/config/environment"
+    if File.exists?(path) || File.exists?("#{path}.rb")
+      require path
+      Rails.application.eager_load! if defined?(Rails)
+    else
+      raise "failed to load app"
     end
-    Rails.application.eager_load!
   end
 
   def self.get_schema_info(klass)
     info = "// Table name: #{klass.table_name}\n"
-    if ENV['plural']
+    if ENV["plural"]
       struct_name = klass.table_name.camelize
     else
       struct_name = klass.to_s.tr_s('::', '')
