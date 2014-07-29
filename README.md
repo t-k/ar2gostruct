@@ -1,5 +1,6 @@
 # Ar2gostruct
 [![Gem Version](https://badge.fury.io/rb/ar2gostruct.png)](https://rubygems.org/gems/ar2gostruct)
+[![Build Status](https://travis-ci.org/t-k/ar2gostruct.png)](https://travis-ci.org/t-k/ar2gostruct)
 
 Automatically generate Golang Struct from your activerecord models.
 
@@ -23,9 +24,10 @@ Usage
 
 On your rails directory.
 ```bash
-bundle exec rake ar2gostruct
+bundle exec rake ar2gostruct association=true
+# association option enables Active Record Associations (Needs ar2gostruct v0.2.0 or greater).
 # or
-ar2gostruct
+bundle exec ar2gostruct --a
 ```
 this will returns
 ```bash
@@ -49,10 +51,12 @@ type User struct {
   UnconfirmedEmail       string         `json:"unconfirmed_email"`
   CreatedAt              time.Time      `json:"created_at"`
   UpdatedAt              time.Time      `json:"updated_at"`
+  Profile                Profile        `json:"profile"`
+  Projects               []Project      `json:"projects"`
 }
 ```
 
-If you're using [qbs](https://github.com/coocood/qbs#), Additional options are available.
+If you're using [qbs](https://github.com/coocood/qbs#) or [gorm](https://github.com/jinzhu/gorm), Additional options are available.
 
 ```bash
 bundle exec rake ar2gostruct orm=qbs

@@ -12,6 +12,10 @@ OptionParser.new do |opt|
     puts "ar2gostruct v#{Ar2gostruct.version}"; exit
   end
 
+  opt.on("--association", "Enable association") do
+    ENV["association"] = "true"
+  end
+
   opt.on("--orm orm", "Specify ORM. Currently supports only qbs") do |orm|
     ENV["orm"] = orm.to_s
   end

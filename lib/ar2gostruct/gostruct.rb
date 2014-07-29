@@ -29,7 +29,7 @@ module Ar2gostruct
       end
 
       def convert_to_gostruct!(klass)
-        converter = Converter.new klass, :plural => ENV["plural"], :orm => ENV["orm"]
+        converter = Converter.new klass, :plural => ENV["plural"], :orm => ENV["orm"], :association => ENV["association"]
         info = converter.convert!
         model_file_name = File.join(self.model_dir, klass.name.underscore + ".rb")
         puts "// #{model_file_name}"

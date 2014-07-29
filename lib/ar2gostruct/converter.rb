@@ -6,8 +6,9 @@ module Ar2gostruct
       @max_type_size = 0
       @plural = option[:plural]
       @orm = option[:orm]
+      @association = option[:association]
     end
-    attr_accessor :klass, :max_col_size, :max_type_size, :plural, :orm
+    attr_accessor :klass, :max_col_size, :max_type_size, :plural, :orm, :association
 
     def convert!
       get_schema_info
@@ -46,7 +47,7 @@ module Ar2gostruct
           info << sprintf("\t%-#{self.max_col_size}.#{self.max_col_size}s%-#{self.max_type_size}.#{self.max_type_size}s`%s`\n", col.name.camelize, type, tags.join(" "))
 
         end
-        info << get_associations
+        info << get_associations if self.association
 
         info << "}\n\n"
         return info
@@ -54,13 +55,21 @@ module Ar2gostruct
 
       def get_max_col_size
         col_name_max_size = self.klass.column_names.collect{|name| name.size}.max || 0
-        assoc_max_size = self.klass.reflect_on_all_associations.collect{|assoc| assoc.name.to_s.size}.max || 0
+        assoc_max_size = if self.association
+          self.klass.reflect_on_all_associations.collect{|assoc| assoc.name.to_s.size}.max || 0
+        else
+          0
+        end
         type_max_size = Ar2gostruct::CONST::TYPE_MAP.collect{|key, value| key.size}.max || 0
         [col_name_max_size + 1, assoc_max_size, type_max_size].max
       end
 
       def get_max_type_size
-        assoc_max_size = self.klass.reflect_on_all_associations.collect{|assoc| assoc.name.to_s.size + 2}.max || 0
+        assoc_max_size = if self.association
+          self.klass.reflect_on_all_associations.collect{|assoc| assoc.name.to_s.size + 2}.max || 0
+        else
+          0
+        end
         type_max_size = Ar2gostruct::CONST::TYPE_MAP.collect{|key, value| key.size}.max || 0
         [assoc_max_size, type_max_size].max
       end
