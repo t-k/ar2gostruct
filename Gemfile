@@ -6,7 +6,12 @@ end
 
 group :development, :test do
   gem "simplecov"
-  gem "sqlite3"
+  platform :ruby do
+    gem "sqlite3"
+  end
+  platform :jruby do
+    gem 'activerecord-jdbcsqlite3-adapter'
+  end
 
   if RUBY_PLATFORM =~ /darwin/
     gem "ruby_gntp"
