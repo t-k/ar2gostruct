@@ -13,6 +13,8 @@ class Project < ActiveRecord::Base
   belongs_to :user
 end
 
+Dir::mkdir("db") unless File.exists?("db")
+
 ActiveRecord::Base.establish_connection \
   :adapter => "sqlite3",
   :database => "db/test.db",
