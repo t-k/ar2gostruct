@@ -1,0 +1,5 @@
+test:
+  adapter: sqlite3
+  database: db/test<%= ENV['TEST_ENV_NUMBER'] %>.db
+  pool: 5
+  timeout: 5000
