@@ -56,7 +56,7 @@ module Ar2gostruct
         col_name_max_size = self.klass.column_names.collect{|name| name.size}.max || 0
         assoc_max_size = self.klass.reflect_on_all_associations.collect{|assoc| assoc.name.to_s.size}.max || 0
         type_max_size = Ar2gostruct::CONST::TYPE_MAP.collect{|key, value| key.size}.max || 0
-        [col_name_max_size, assoc_max_size, type_max_size].max
+        [col_name_max_size + 1, assoc_max_size, type_max_size].max
       end
 
       def get_max_type_size
