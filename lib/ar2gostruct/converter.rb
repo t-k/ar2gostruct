@@ -76,11 +76,26 @@ module Ar2gostruct
 
       def get_orm_options(col)
         tags ||= []
-        builder = "Ar2gostruct::Builder::ORM::#{self.orm.upcase}".constantize.new(self.klass)
-        option = builder.get_option col
-        tags << option if option
+        self.orm.split(",").each do |orm_name|
+          builder = get_orm_builder orm_name
+          if builder
+            option = builder.get_option col
+            tags << option if option
+          end
+        end
+        return tags
       rescue => e
         []
+      end
+
+      def get_orm_builder(orm_name)
+        prefix = "Ar2gostruct::Builder::ORM::"
+        klass = if Object.const_defined?("#{prefix}#{orm_name.upcase}")
+          "#{prefix}#{orm_name.upcase}"
+        elsif Object.const_defined?("#{prefix}#{orm_name.camelize}")
+          "#{prefix}#{orm_name.camelize}"
+        end
+        return "Ar2gostruct::Builder::ORM::#{orm_name.upcase}".constantize.new(self.klass) if klass
       end
 
       def get_struct_name
