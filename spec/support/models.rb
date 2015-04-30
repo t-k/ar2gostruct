@@ -3,6 +3,7 @@ require "active_record"
 class User < ActiveRecord::Base
   has_one :profile
   has_many :projects
+  validates :email, length: { minimum: 1, maximum: 120 }
 end
 
 class Profile < ActiveRecord::Base

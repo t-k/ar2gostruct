@@ -16,10 +16,10 @@ module Ar2gostruct
           # set size
           if col.type == :string
             # SQL type
-            if col.sql_type
+            if col.sql_type && /\A\w+\(\d+\)/.match(col.sql_type)
               orm_option << "type:#{col.sql_type}"
             end
-            orm_option << "size:#{col.limit}"
+            orm_option << "size:#{col.limit}" if col.limit
           end
 
           if orm_option.present?

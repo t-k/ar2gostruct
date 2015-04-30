@@ -90,12 +90,12 @@ module Ar2gostruct
 
       def get_orm_builder(orm_name)
         prefix = "Ar2gostruct::Builder::ORM::"
-        klass = if Object.const_defined?("#{prefix}#{orm_name.upcase}")
+        builder = if Object.const_defined?("#{prefix}#{orm_name.upcase}")
           "#{prefix}#{orm_name.upcase}"
         elsif Object.const_defined?("#{prefix}#{orm_name.camelize}")
           "#{prefix}#{orm_name.camelize}"
         end
-        return "Ar2gostruct::Builder::ORM::#{orm_name.upcase}".constantize.new(self.klass) if klass
+        return builder.constantize.new(self.klass) if builder
       end
 
       def get_struct_name
