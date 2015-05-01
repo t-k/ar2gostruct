@@ -28,6 +28,7 @@ bundle exec rake ar2gostruct association=true
 # association option enables Active Record Associations (Needs ar2gostruct v0.2.0 or greater).
 # or
 bundle exec ar2gostruct --a
+# If you prefer plural struct name, "--plural" option is available.
 ```
 this will returns
 ```bash
@@ -56,13 +57,13 @@ type User struct {
 }
 ```
 
-If you're using [qbs](https://github.com/coocood/qbs#) or [gorm](https://github.com/jinzhu/gorm), Additional options are available.
+If you're using [qbs](https://github.com/coocood/qbs#), [gorm](https://github.com/jinzhu/gorm) or [validator](https://github.com/go-validator/validator), Additional options are available.
 
 ```bash
 bundle exec rake ar2gostruct orm=qbs
 # or
 ar2gostruct -o qbs
-# If you prefer plural struct name, "--plural" option is available.
+# Using comma separated value, you can specify multiple ORMs(e.g. "ar2gostruct --o validator,qbs").
 
 // app/models/user.rb
 // Table name: users
