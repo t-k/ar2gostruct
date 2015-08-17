@@ -29,6 +29,11 @@ OptionParser.new do |opt|
     ENV["model_dir"] = dir.to_s
   end
 
+  opt.on("--package pkgname", 
+         "package name so structs can be imported") do |p|
+    ENV["package"] = p.to_s
+  end
+
   opt.on("--require r", "require path") do |r|
     ENV["require_path"] = r.to_s
   end

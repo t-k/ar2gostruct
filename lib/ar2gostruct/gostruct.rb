@@ -3,6 +3,7 @@ module Ar2gostruct
     def initialize(model_dir)
       @model_dir = model_dir
       get_models
+      puts "package #{ENV["package"]}\n\n" unless ENV["package"].blank?
     end
     attr_accessor :model_dir, :models
 
