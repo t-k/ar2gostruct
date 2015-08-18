@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.2.2
+ * Add a --package flag (Thanks @neophiliac)
+
 ## 0.2.1
  * Add support for Package validator https://github.com/go-validator/validator
  * Allow multiple orm
